@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printmaking Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <h1 class="logo">Portfolio</h1>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to my portfolio! I am a passionate printmaker dedicated to creating unique and meaningful artworks.</p>
+                    <p>My work explores various printmaking techniques including screenprinting, etching, and photography.</p>
+                </div>
+                <div class="artist-statement">
+                    <h3>Artist Statement</h3>
+                    <p>Binnen printmaking onderzoek ik hoe tijd en snelheid ons kijken beïnvloeden. In een wereld waarin technologie steeds sneller evolueert, zoek ik als kunstenares mijn positie tegenover dat ritme. Mijn werk bestaat voornamelijk uit zeefdrukken, aangevuld met inktschilderingen die ik met de losse hand aanbreng. Zo ontstaan prints of installaties waarin de kijker zich traag mag verhouden tot flarden van beeld en mijn persoonlijke herinneringen. Ervaring staat centraal, niet het begrijpen, maar het ervaren van tijd zelf.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Portfolio</h2>
+            <div class="portfolio-grid">
+                {% for item in portfolio_items %}
+                <div class="portfolio-item" data-title="{{ item.title }}" 
+                      data-date="{{ item.date }}" 
+                      data-medium="{{ item.medium }}" 
+                      data-size="{{ item.size }}"
+                      data-description="{{ item.description }}">
+                    <img src="{{ url_for('static', filename=item.image) }}" alt="{{ item.title }}">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-content">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Message" required></textarea>
+                    </div>
+                    <button type="submit" class="contact-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="portfolio-modal" class="modal">
+        <div class="modal-content">
+            <div class="nav-arrow prev" onclick="navigateImage(-1)">
+                <span class="arrow-icon">&larr;</span>
+            </div>
+            <div class="nav-arrow next" onclick="navigateImage(1)">
+                <span class="arrow-icon">&rarr;</span>
+            </div>
+            <span class="close">&times;</span>
+            <img src="" alt="" id="modal-image">
+            <div class="modal-details">
+                <h3 id="modal-title"></h3>
+                <div class="metadata">
+                    <p><strong>Date:</strong> <span id="modal-date"></span></p>
+                    <p><strong>Medium:</strong> <span id="modal-medium"></span></p>
+                    <p><strong>Size:</strong> <span id="modal-size"></span></p>
+                </div>
+                <div class="description">
+                    <span class="description-label">Description:</span>
+                    <p id="modal-description"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
