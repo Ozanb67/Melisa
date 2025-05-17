@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printmaking Portfolio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    <title>Melisa - Printmaking Portfolio</title>
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <nav>
-        <div class="nav-content">
-            <h1 class="logo">Portfolio</h1>
+    <header>
+        <nav>
+            <div class="logo">Melisa</div>
             <ul class="nav-links">
-                <li><a href="#about">About</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#resume">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Welcome to my portfolio! I am a passionate printmaker dedicated to creating unique and meaningful artworks.</p>
-                    <p>My work explores various printmaking techniques including screenprinting, etching, and photography.</p>
-                </div>
+    <main>
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <h2>Portfolio</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" data-title="Call Me Piggy" data-date="2024" 
+                        data-medium="Screenprint" data-size="50x70 cm" 
+                        data-description="A vibrant exploration of color and form">
+                        <img src="static/portfolio/Callmepiggy.jpg" alt="Call Me Piggy">
                     </div>
                     <div class="portfolio-item" data-title="Melysterious" data-date="2024" 
                         data-medium="Lithography" data-size="50x70 cm" 
@@ -137,6 +138,6 @@
         </div>
     </div>
 
-
+    <script src="static/js/main.js"></script>
 </body>
 </html>
