@@ -24,7 +24,6 @@ function updateModal(index) {
     document.getElementById('modal-date').textContent = `Date: ${data.date}`;
     document.getElementById('modal-medium').textContent = `Medium: ${data.medium}`;
     document.getElementById('modal-size').textContent = `Size: ${data.size}`;
-    document.getElementById('modal-description').innerHTML = `<strong>Description: </strong><br>${data.description}`;
     
     // Show the modal
     portfolioModal.style.display = 'block';
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         date: item.getAttribute('data-date'),
         medium: item.getAttribute('data-medium'),
         size: item.getAttribute('data-size'),
-        description: item.getAttribute('data-description'),
+
         image: item.querySelector('img').src
     }));
 
@@ -100,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.nav-arrow.prev').addEventListener('click', () => {
         navigateImage(-1);
     });
+
+    // Resume link is now handled directly in HTML
 
     document.querySelector('.nav-arrow.next').addEventListener('click', () => {
         navigateImage(1);
