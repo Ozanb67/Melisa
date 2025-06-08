@@ -9,15 +9,22 @@ function navigateImage(direction) {
 
 function updateModal(index) {
     const data = portfolioData[index];
+    console.log('Updating modal with data:', data);
+    
+    const modalImage = document.getElementById('modal-image');
+    if (!modalImage) {
+        console.error('Modal image element not found');
+        return;
+    }
     
     // Update modal content using IDs
-    document.getElementById('modal-image').src = data.image;
-    document.getElementById('modal-image').alt = data.title;
+    modalImage.src = data.image;
+    modalImage.alt = data.title;
     document.getElementById('modal-title').textContent = data.title;
-    document.getElementById('modal-date').textContent = data.date;
-    document.getElementById('modal-medium').textContent = data.medium;
-    document.getElementById('modal-size').textContent = data.size;
-    document.getElementById('modal-description').textContent = data.description;
+    document.getElementById('modal-date').textContent = `Date: ${data.date}`;
+    document.getElementById('modal-medium').textContent = `Medium: ${data.medium}`;
+    document.getElementById('modal-size').textContent = `Size: ${data.size}`;
+    document.getElementById('modal-description').innerHTML = `<strong>Description: </strong><br>${data.description}`;
     
     // Show the modal
     portfolioModal.style.display = 'block';
@@ -33,17 +40,19 @@ function updateModal(index) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Store portfolio items and their data
+    // Initialize and populate portfolioData by extracting data attributes from .portfolio-item elements
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     portfolioData = Array.from(portfolioItems).map(item => ({
         element: item,
-        title: item.dataset.title,
-        date: item.dataset.date,
-        medium: item.dataset.medium,
-        size: item.dataset.size,
-        description: item.dataset.description,
+        title: item.getAttribute('data-title'),
+        date: item.getAttribute('data-date'),
+        medium: item.getAttribute('data-medium'),
+        size: item.getAttribute('data-size'),
+        description: item.getAttribute('data-description'),
         image: item.querySelector('img').src
     }));
+
+    console.log('Portfolio Data:', portfolioData);
 
     // Portfolio modal functionality
     portfolioModal = document.getElementById('portfolio-modal');
@@ -85,6 +94,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 navigateImage(1);
             }
         }
+    });
+
+    // Navigation arrows
+    document.querySelector('.nav-arrow.prev').addEventListener('click', () => {
+        navigateImage(-1);
+    });
+
+    document.querySelector('.nav-arrow.next').addEventListener('click', () => {
+        navigateImage(1);
     });
 
     // Form submission
