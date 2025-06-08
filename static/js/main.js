@@ -21,9 +21,9 @@ function updateModal(index) {
     modalImage.src = data.image;
     modalImage.alt = data.title;
     document.getElementById('modal-title').textContent = data.title;
-    document.getElementById('modal-date').textContent = `Date: ${data.date}`;
-    document.getElementById('modal-medium').textContent = `Medium: ${data.medium}`;
-    document.getElementById('modal-size').textContent = `Size: ${data.size}`;
+    document.getElementById('modal-date').textContent = `${data.date}`;
+    document.getElementById('modal-medium').textContent = `${data.medium}`;
+    document.getElementById('modal-size').textContent = `${data.size}`;
     
     // Show the modal
     portfolioModal.style.display = 'block';
