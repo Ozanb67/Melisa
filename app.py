@@ -2,18 +2,23 @@ from flask import Flask, render_template, send_from_directory, request, jsonify
 from flask_mail import Mail, Message
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Disable caching
 
 # Configure Flask-Mail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'melisa.kac98@gmail.com'  # Your Gmail address
-app.config['MAIL_PASSWORD'] = os.getenv('GMAIL_APP_PASSWORD')  # Your Gmail app-specific password
-app.config['MAIL_DEFAULT_SENDER'] = 'melisa.kac98@gmail.com'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME', 'melisa.kac98@gmail.com')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')  # Should be set in Railway environment variables
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', 'melisa.kac98@gmail.com')
 
-mail = Mail(app)
+# Initialize Flask-Mail
+try:
+    mail = Mail(app)
+except Exception as e:
+    print(f"Error initializing Flask-Mail: {e}")
+    mail = None
 
 # Get list of image files in portfolio directory
 PORTFOLIO_DIR = os.path.join('static', 'portfolio')
