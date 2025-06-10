@@ -2,6 +2,9 @@ let portfolioData = [];
 let currentImageIndex = 0;
 let portfolioModal = null;
 
+// Add smooth scrolling to the entire document
+document.documentElement.style.scrollBehavior = 'smooth';
+
 function navigateImage(direction) {
     currentImageIndex = (currentImageIndex + direction + portfolioData.length) % portfolioData.length;
     updateModal(currentImageIndex);
